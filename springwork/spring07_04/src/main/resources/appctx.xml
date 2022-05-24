@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation=
+"http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- DataSource 등록 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<!-- 접속 관련 설정 -->
+		<property name="driverClass" value="oracle.jdbc.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="user" value="springuser"/>
+		<property name="password" value="1234"/>
+		
+		<!-- pool 관련 설정 -->
+		<property name="maxPoolSize" value="100"/>
+		<property name="maxIdleTime" value="600"/>
+		<property name="idleConnectionTestPeriod" value="300"/>
+	</bean>
+	
+	<bean id="versionPrinter" class="spring.VersionPrinter">
+		<property name="majorVersion" value="5"/>
+		<property name="minorVersion" value="0"/>
+	</bean>
+	
+	<!-- 지정된 패키지 및 하위 패키지에서 @Component를 읽어 빈으로 등록 -->
+	<context:component-scan base-package="spring"/>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
