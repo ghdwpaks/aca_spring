@@ -37,7 +37,7 @@ public class MemberDao {
 					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 						PreparedStatement pstmt = con.prepareStatement(
 								"INSERT INTO MEMBER(ID, EMAIL, PASSWORD, NAME, REGDATE) "
-								+ "values (MEMBER_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)",
+								+ "values (NULL, ?, ?, ?, now())",
 						new String[] {"ID"});
 						
 						pstmt.setString(1, member.getEmail());
